@@ -2872,6 +2872,16 @@ $('#adminSearchId').addEventListener('input', debounce(() => {
   };
 }, 300));
 /* ---------------- global events ---------------- */
+    // Auto-close FAQs
+$$('details.faq').forEach(faq => {
+  faq.addEventListener('toggle', () => {
+    if (faq.open) {
+      $$('details.faq').forEach(other => {
+        if (other !== faq) other.open = false;
+      });
+    }
+  });
+});
 window.addEventListener('scroll', () => {
   const s = scrollY > 600;
   const t = $('#toTop');
